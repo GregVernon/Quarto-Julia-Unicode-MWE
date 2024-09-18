@@ -31,7 +31,7 @@ format:
     latex-tinytex: false
     keep-tex: true
     mainfont: "Times New Roman"
-    monofont: "MiriamMonoCLM-Book"
+    monofont: "JuliaMono"
     documentclass: scrreprt
     include-in-header:
       text: |
@@ -40,7 +40,7 @@ format:
         \usepackage{mathpazo}
         \usepackage{mathtools}
         \usepackage{bm}
-        \usepackage{breqn}
+        %\usepackage{breqn}
         %\newcommand{\Real}{\mathbb{R}}
         %\newcommand{\Inner}[2]{\left\langle #1, #2 \right\rangle}
         %\newcommand{\Vector}[1]{\mathbf{\mathit{#1}}}
