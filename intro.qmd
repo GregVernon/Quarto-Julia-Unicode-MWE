@@ -45,4 +45,4 @@ p2 = Plots.plot( L2, 0, 2π, label="\$\\| f, g \\|_2 \$" )
 Plots.plot( p1, p2, layout=Plots.@layout([a;b]), link=:x, fmt=:png )
 ```
 
-[^1] See @Julia-2017
+[^1]: See @Julia-2017
