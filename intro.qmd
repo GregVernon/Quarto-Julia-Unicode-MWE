@@ -1,5 +1,48 @@
+---
+engine: julia
+---
+
+```{julia}
+import Pkg
+Pkg.activate( "julia_deps" )
+
+import Symbolics
+import SymbolicNumericIntegration
+using SymbolicNumericIntegration: integrate
+import Plots
+```
+
 # Introduction
 
-This is a book created from markdown and executable code.
+This is a minimum (non-)working example of trying to use Unicode in Julia[^1] code-blocks, within a Quarto document.
+The goal is to be able to render this project as a website (e.g., `quarto preview`) or as a traditional "book" in PDF form (e.g., `quarto render`).
 
-See @knuth84 for additional discussion of literate programming.
+# Issues
+
+## Example 1
+Consider this sentence, which contains in-line equations like $f(x)$ and $\Omega = [-1, 1]$.
+The combination of `\use_package{unicode-math}` and in-line LaTeX equations results in errors when using the `xelatex` compiler.
+
+## Example 2
+Here is a Julia code-block that *does not* contain any unicode characters:
+
+```{julia}
+#| output: false
+Symbolics.@variables x
+f = sin( x )
+g = sin( x )
+L2 = SymbolicNumericIntegration.integrate( f * g, x )[1]
+```
+
+While this renders correctly, the following code-block (as well as this sentence) contains a unicode character, π, for clarity.
+The character was obtained by typing `\pi` in VSCode running the Julia extension.
+
+```{julia}
+L2 = Symbolics.substitute( L2, Dict([x=>x]) )
+p1 = Plots.plot( f, 0, 2π, label="\$f(x)\$" )
+Plots.plot!( g, 0, 2π, label="\$g(x)\$" )
+p2 = Plots.plot( L2, 0, 2π, label="\$\\| f, g \\|_2 \$" )
+Plots.plot( p1, p2, layout=Plots.@layout([a;b]), link=:x, fmt=:png )
+```
+
+[^1] See @Julia-2017
